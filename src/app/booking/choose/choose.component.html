@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="with=device-width, initial-scale=1.0">
+	<title>Bookings</title>
+	<link rel="stylesheet" href="choose.component.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.cpm/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body class="header" style="background-image: url(../assets/choose.jpg); background-repeat: no-repeat; background-attachment: fixed;">
+	
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a href="#" class="navbar-brand">
+                <img src="assets/logo.png" height="28" style="width:30px;" alt="CoolBrand">
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active" style="font-size: large; font-weight: bold;">Wissen Airlines</a>
+                    <a routerLink="/" class="nav-item nav-link">Home</a>
+                    <a routerLink="/contact" class="nav-item nav-link">Contact Us</a>
+                    <a routerLink="/about" class="nav-item nav-link">About Us</a>
+                </div>
+                <div class="navbar-nav ms-auto">
+                    <a routerLink="/book" class="nav-item nav-link">Book Flight</a>
+                </div>
+            </div>
+        </div>
+    </nav> 
+	<div class="text-center Yash">
+		<h1><i>Wanna discover the World with us?</i> </h1>
+	</div>
+
+
+	<div class="text-box">
+		<br><br><br><input type="text" id="source" placeholder="Enter Boarding point " [(ngModel)]="flightObj.source" [ngModelOptions]="{standalone:true}" required> &nbsp;
+
+		<input type="text" id="Destination" placeholder="Enter Destination " [(ngModel)]="flightObj.destination" [ngModelOptions]="{standalone:true}" required>&nbsp;
+
+		<button type="submit" class="hero-btn" (click)="search()">SEARCH</button>
+        {{bookStatus}}
+	</div>
+    <tbody>
+        <ng-container *ngIf="bookStatus==true then showTable "></ng-container>
+</tbody>
+<ng-template #showTable>
+    <tr *ngFor="let fly of flightData ">
+        <td> {{fly.flightnumber}} </td>
+        <td> {{fly.destination}} </td>
+        <td> {{fly.flightname}} </td>
+        <td> {{fly.landingtime}} </td>
+        <td> {{fly.source}} </td>
+        <td> {{fly.takeoftime}} </td>
+        <td>
+                <button class="btn btn-success" (click)="book(fly)">BOOK</button> &nbsp;
+        </td>
+</tr>
+</ng-template>
+<tbody>
+    <ng-container *ngIf="confirm==true then getRecord "></ng-container>
+</tbody>
+<ng-template #getRecord>
+    <input type="email"  placeholder="Email" id="mail"
+    [(ngModel)]="passenger.email" [ngModelOptions]="{standalone: true}">
+    <input type="text"  placeholder="Name" id="namee"
+    [(ngModel)]="passenger.name" [ngModelOptions]="{standalone: true}">
+       <button (click)="submit(passenger)"></button>
+</ng-template>
+
+    </body>
